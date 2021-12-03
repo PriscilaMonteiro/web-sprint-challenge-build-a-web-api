@@ -42,8 +42,6 @@ async function validProjectId(req, res, next) {
 // }
 // _____________________________________________________________
 
-
-
 async function validProject(req, res, next) {
   try {
     const validated = await projectSchema.validate(
@@ -52,11 +50,20 @@ async function validProject(req, res, next) {
     )
     req.body = validated
     next()
-    console.log("schema", req.body)
   } catch (err) {
     next({ message: 'Name and Description fields are required', status: 400 })
   }
 }
+
+function checkBoolean(req, res, next) {
+  if (req.body.completed === undefined) {
+    next({ status: 400, message: "Need to be checked" });
+  } else {
+    next();
+  }
+}
+  
+
 
 // #### Projects
 
@@ -71,4 +78,5 @@ module.exports = {
   handleError,
   validProjectId,
   validProject,
+  checkBoolean,
 };

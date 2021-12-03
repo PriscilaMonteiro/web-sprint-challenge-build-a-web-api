@@ -4,6 +4,7 @@ const {
   handleError,
   validProjectId,
   validProject,
+  checkBoolean,
 } = require('./projects-middleware');
 
 const Projects = require('./projects-model');
@@ -26,18 +27,16 @@ router.post('/', validProject, (req, res, next) => {
   Projects.insert(req.body)
   .then(newProject => {
     res.status(201).json(newProject)
-    console.log("newProject", newProject)
-    console.log("reqbody", req.body)
   })
   .catch(next)
 });
 
-
-// - [ ] `[POST] /api/projects`
-//   - Returns the newly created project as the body of the response.
-//   - If the request body is missing any of the required fields it responds with a status code 400.
-
-
+router.put('/:id', validProjectId, validProject, checkBoolean, (req,res) => {
+  Projects.update(req.params.id, req.body)
+  .then(updated => {
+    res.status(200).json(updated)
+  })
+})
 
 // - [ ] `[PUT] /api/projects/:id`
 //   - Returns the updated project as the body of the response.
