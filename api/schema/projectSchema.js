@@ -16,7 +16,6 @@ const projectSchema = yup.object().shape({
     .boolean()
 })
 
-
 module.exports = {
-  projectSchema,
+  projectSchema, 
 }

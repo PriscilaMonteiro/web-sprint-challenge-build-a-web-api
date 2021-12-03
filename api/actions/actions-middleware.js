@@ -1,4 +1,12 @@
-// add middlewares here related to actions
+const Action = require('./actions-model');
+
+function handleActionsError(err, req, res, next) { //eslint-disable-line
+  res.status(err.status || 500).json({
+    message: err.message,
+    prodMessage: 'The action information could not be retrieved',
+    stack: err.stack,
+  });
+}
 
 
 // #### Actions
@@ -10,3 +18,7 @@
 // | description | string    | required, up to 128 characters long                                                             |
 // | notes       | string    | required, no size limit. Used to record additional notes or requirements to complete the action |
 // | completed   | boolean   | not required, defaults to false when creating actions             
+
+module.exports = {
+  handleActionsError,
+}

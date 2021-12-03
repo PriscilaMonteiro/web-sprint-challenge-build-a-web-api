@@ -1,24 +1,24 @@
 const express = require('express');
 
+const {
+  handleActionsError,
+} = require('./actions-middleware');
+
 const Actions = require('./actions-model');
 const router = express.Router();
-
-
-
-
-
-
-
-
-
-
 
 
 
 // - [ ] `[GET] /api/actions`
 //   - Returns an array of actions (or an empty array) as the body of the response.
 
-
+router.get('/', (req,res,next) => {
+  Actions.get()
+    .then((actions) => {
+      res.status(200).json(actions);
+    })
+    .catch(next);
+})
 
 
 
@@ -50,5 +50,7 @@ const router = express.Router();
 // - [ ] `[DELETE] /api/actions/:id`
 //   - Returns no response body.
 //   - If there is no action with the given `id` it responds with a status code 404.
+
+router.use(handleActionsError);
 
 module.exports = router;

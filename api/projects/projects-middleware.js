@@ -62,7 +62,7 @@ function checkBoolean(req, res, next) {
     next();
   }
 }
-  
+
 
 module.exports = {
   handleError,
