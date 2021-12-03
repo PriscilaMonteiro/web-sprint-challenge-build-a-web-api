@@ -2,6 +2,7 @@ const express = require('express');
 
 const {
   handleError,
+  validProjectId,
 } = require('./projects-middleware');
 
 const Projects = require('./projects-model');
@@ -14,11 +15,11 @@ router.get('/', (req,res,next) => {
   })
   .catch(next);
 })
-// - [ ] `[GET] /api/projects`
-//   - Returns an array of projects as the body of the response.
-//   - If there are no projects it responds with an empty array.
 
 
+router.get('/:id', validProjectId, (req, res) => {
+  res.status(200).json(req.project)
+});
 
 // - [ ] `[GET] /api/projects/:id`
 //   - Returns a project with the given `id` as the body of the response.
