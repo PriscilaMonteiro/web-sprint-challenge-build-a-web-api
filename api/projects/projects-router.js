@@ -28,22 +28,24 @@ router.post('/', validProject, (req, res, next) => {
   .then(newProject => {
     res.status(201).json(newProject)
   })
-  .catch(next)
+  .catch(next);
 });
 
-router.put('/:id', validProjectId, validProject, checkBoolean, (req,res) => {
+router.put('/:id', validProjectId, validProject, checkBoolean, (req,res, next) => {
   Projects.update(req.params.id, req.body)
   .then(updated => {
     res.status(200).json(updated)
   })
+  .catch(next);
 })
 
-// - [ ] `[PUT] /api/projects/:id`
-//   - Returns the updated project as the body of the response.
-//   - If there is no project with the given `id` it responds with a status code 404.
-//   - If the request body is missing any of the required fields it responds with a status code 400.
-
-
+router.delete('/:id', validProjectId, (req, res, next) => {
+  Projects.remove(req.params.id)
+  .then(() => {
+    res.status(200).json({})
+  })
+  .catch(next);
+})
 
 // - [ ] `[DELETE] /api/projects/:id`
 //   - Returns no response body.

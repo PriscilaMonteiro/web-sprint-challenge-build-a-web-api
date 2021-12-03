@@ -64,16 +64,6 @@ function checkBoolean(req, res, next) {
 }
   
 
-
-// #### Projects
-
-// | Field       | Data Type | Metadata                                                                |
-// | ----------- | --------- | ----------------------------------------------------------------------- |
-// | id          | number    | do not provide it when creating projects, the database will generate it |
-// | name        | string    | required                                                                |
-// | description | string    | required                                                                |
-// | completed   | boolean   | not required, defaults to false when creating projects           
-
 module.exports = {
   handleError,
   validProjectId,
