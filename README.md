@@ -43,48 +43,48 @@ A _"resetdb"_ script exists that allows you to reset the database to its origina
 
 Inside `api/projects/projects-router.js` build the following endpoints:
 
-- [ ] `[GET] /api/projects`
+- [✅ ] `[GET] /api/projects`
   - Returns an array of projects as the body of the response.
   - If there are no projects it responds with an empty array.
-- [ ] `[GET] /api/projects/:id`
+- [✅ ] `[GET] /api/projects/:id`
   - Returns a project with the given `id` as the body of the response.
   - If there is no project with the given `id` it responds with a status code 404.
-- [ ] `[POST] /api/projects`
+- [✅ ] `[POST] /api/projects`
   - Returns the newly created project as the body of the response.
   - If the request body is missing any of the required fields it responds with a status code 400.
-- [ ] `[PUT] /api/projects/:id`
+- [✅ ] `[PUT] /api/projects/:id`
   - Returns the updated project as the body of the response.
   - If there is no project with the given `id` it responds with a status code 404.
   - If the request body is missing any of the required fields it responds with a status code 400.
-- [ ] `[DELETE] /api/projects/:id`
+- [✅ ] `[DELETE] /api/projects/:id`
   - Returns no response body.
   - If there is no project with the given `id` it responds with a status code 404.
-- [ ] `[GET] /api/projects/:id/actions`
+- [✅ ] `[GET] /api/projects/:id/actions`
   - Returns an array of actions (could be empty) belonging to a project with the given `id`.
   - If there is no project with the given `id` it responds with a status code 404.
 
 Inside `api/actions/actions-router.js` build endpoints for performing CRUD operations on _actions_:
 
-- [ ] `[GET] /api/actions`
+- [✅ ] `[GET] /api/actions`
   - Returns an array of actions (or an empty array) as the body of the response.
-- [ ] `[GET] /api/actions/:id`
+- [✅ ] `[GET] /api/actions/:id`
   - Returns an action with the given `id` as the body of the response.
   - If there is no action with the given `id` it responds with a status code 404.
-- [ ] `[POST] /api/actions`
+- [✅ ] `[POST] /api/actions`
   - Returns the newly created action as the body of the response.
   - If the request body is missing any of the required fields it responds with a status code 400.
   - When adding an action make sure the `project_id` provided belongs to an existing `project`.
-- [ ] `[PUT] /api/actions/:id`
+- [✅ ] `[PUT] /api/actions/:id`
   - Returns the updated action as the body of the response.
   - If there is no action with the given `id` it responds with a status code 404.
   - If the request body is missing any of the required fields it responds with a status code 400.
-- [ ] `[DELETE] /api/actions/:id`
+- [✅ ] `[DELETE] /api/actions/:id`
   - Returns no response body.
   - If there is no action with the given `id` it responds with a status code 404.
 
 #### Middleware functions
 
-- [ ] Write at least two middleware functions for this API, and consume them in the proper places of your code.
+- [✅ ] Write at least two middleware functions for this API, and consume them in the proper places of your code.
 
 ### Database Schemas
 
@@ -95,21 +95,21 @@ The description of the structure and extra information about each _resource_ sto
 | Field       | Data Type | Metadata                                                                |
 | ----------- | --------- | ----------------------------------------------------------------------- |
 | id          | number    | do not provide it when creating projects, the database will generate it |
-| name        | string    | required                                                                |
-| description | string    | required                                                                |
-| completed   | boolean   | not required, defaults to false when creating projects                  |
+| name        | string    | required ✅                                                             |
+| description | string    | required ✅                                                             |
+| completed   | boolean   | not required, defaults to false when creating projects ✅               |
 
 #### Actions
 
-| Field       | Data Type | Metadata                                                                                        |
-| ----------- | --------- | ----------------------------------------------------------------------------------------------- |
-| id          | number    | do not provide it when creating actions, the database will generate it                          |
-| project_id  | number    | required, must be the id of an existing project                                                 |
-| description | string    | required, up to 128 characters long                                                             |
-| notes       | string    | required, no size limit. Used to record additional notes or requirements to complete the action |
-| completed   | boolean   | not required, defaults to false when creating actions                                           |
+| Field       | Data Type | Metadata                                                                                           |
+| ----------- | --------- | -------------------------------------------------------------------------------------------------- |
+| id          | number    | do not provide it when creating actions, the database will generate it                             |
+| project_id  | number    | required, must be the id of an existing project ✅                                                 |
+| description | string    | required, up to 128 characters long ✅                                                             |
+| notes       | string    | required, no size limit. Used to record additional notes or requirements to complete the action ✅ |
+| completed   | boolean   | not required, defaults to false when creating actions ✅                                           |
 
-### Database Persistence Helpers
+### Database Persistence Helpers ✅
 
 The project includes models you can use to manage the persistence of _project_ and _action_ data. These files are `api/projects/projects-model.js` and `api/actions/actions-model.js`. Both files publish the following api, which you can use to store, modify and retrieve each resource:
 
@@ -137,17 +137,90 @@ We have provided test data for all the resources.
 
 ## Submission format
 
-- [ ] Submit via Codegrade by pushing commits to your `main` branch.
-- [ ] Check Codegrade before the deadline to compare its results against your local tests.
-- [ ] Check Codegrade on the days following the Sprint Challenge for reviewer feedback.
-- [ ] New commits will be evaluated by Codegrade if pushed _before_ the sprint challenge deadline.
+- [✅ ] Submit via Codegrade by pushing commits to your `main` branch.
+- [✅ ] Check Codegrade before the deadline to compare its results against your local tests.
+- [Yeap! ] Check Codegrade on the days following the Sprint Challenge for reviewer feedback.
+- [✅ ] New commits will be evaluated by Codegrade if pushed _before_ the sprint challenge deadline.
 
 ## Interview Questions
 
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. The core features of Node.js and Express and why they are useful.
-1. Understand and explain the use of Middleware.
-1. The basic principles of the REST architectural style.
-1. Understand and explain the use of Express Routers.
-1. Describe tooling used to manually test the correctness of an API.
+
+Node.js allows developers to run javascript in the terminal instead of the browser.
+✔ Able to write handlers for requests with different HTTP verbs at different URL routes,
+✔️ Written in plain JavaScript,
+✔️ NPM provides A LOT of reusable packages,
+✔️ Portability is great and well-supported,
+✔️ Also active third party ecosystem and dev community.
+
+Express is THE MOST popular Node web framework it allow us to to write API's more quickly.
+There are tons of compatible middleware packages to address almost any web dev problem that you can face
+
+Some examples:
+
+- cors - Enable cross-origin resource sharing (CORS) with various options.,
+- morgan - HTTP request logger,
+- helmet - Helps secure your apps by setting various HTTP headers.
+
+2. Understand and explain the use of Middleware.
+
+Middleware is function that extends software, is used to add features to Express and it is the biggest feature of Express.
+Most of the code we write is middleware, including route handlers.
+It is a bunch of functions that travels to the framework req/res pipeline to handle tasks such as database access,
+check for errors in the req.body, and they get executed in the order they are introduced into the server code (order matters).
+
+3. The basic principles of the REST architectural style.
+
+Rest (REpresentational State Transfer) is a process of architectural design created by Roy Fielding based on the idea that
+a designer starts with the system needs as a whole, without constraints, and then incrementally identifies
+and applies constraints to elements of the system in order to differentiate the design space and
+allow the forces that influence system behavior to flow naturally, in harmony with the system.
+
+After a null style, free of constraints, boundaries are added.
+
+- The first constraints added are those of the client-server based architectural style using the principle of separation os concerns.
+  In others words: it is important to separate user interface concerns from the data storage concerns.
+
+- Communication must be stateless in nature. That guarantees visibility, reliability, and scalability
+
+- Efficiency, scalability and user-perceived performance are enhanced by cache constraints
+  that requires that the data is labeled (implicit or not) as cacheable or not.
+  In case it is the data response could be reused later for equivalent req.
+
+- Uniform interface between components gives simplified and the visibility of interactions to the project.
+
+- Layered System is added in order to further improve behavior for Internet-scale requirements.
+  Layers can be used to encapsulate legacy services and to protect new services from legacy clients,
+  simplifying components by moving infrequently used functionality to a shared intermediary.
+
+- Code-On-Demand. Allowing features to be downloaded after deployment improves system extensibility.
+
+Recommendations are:
+
+Everything is a resource.
+Each resource is accessible via a unique URI.
+Resources can have multiple representations.
+Communication happens over a stateless protocol (HTTP).
+Resource management happens via HTTP methods.
+
+Rest architecture is easier to use comparing to SOAP (Simple Object Access Protocol)
+
+_--------------------------------------------------------------------------------------------------------------------_
+If I need to explain to a non-tech person I would say that Rest is a set of guidelines that can be implemented as
+needed, making REST API's faster and more lightweight, with increased scalability, great for IoT (internet of things)
+and Mobile App Development.
+_--------------------------------------------------------------------------------------------------------------------_
+
+4. Understand and explain the use of Express Routers.
+
+Express routers is like an Express application with its own Routing and Middleware.
+It has to exist inside an Express application.
+It organizes the api's into neat routes making the main server file cleaner.
+
+5. Describe tooling used to manually test the correctness of an API.
+
+Some tools can be used for testing the correctness of an API for example Postman, Httpie or Curl.
+Using this kind of tools allow developers to have full control when making requests.
+(and it is also fun to see the response doing what you demanded!)
