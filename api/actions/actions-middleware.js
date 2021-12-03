@@ -8,6 +8,21 @@ function handleActionsError(err, req, res, next) { //eslint-disable-line
   });
 }
 
+async function validActionId(req, res, next) {
+  try {
+    const { id } = req.params;
+    const action = await Action.get(id)
+    if(action){
+      req.action = action 
+      next();
+    } else {
+      next({ status:404, message: 'Action not found'});
+    }
+  } catch (err) {
+    next(err);
+  }
+}
+
 
 // #### Actions
 
@@ -21,4 +36,5 @@ function handleActionsError(err, req, res, next) { //eslint-disable-line
 
 module.exports = {
   handleActionsError,
+  validActionId,
 }

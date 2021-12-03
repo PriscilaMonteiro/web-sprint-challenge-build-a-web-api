@@ -2,6 +2,7 @@ const express = require('express');
 
 const {
   handleActionsError,
+  validActionId,
 } = require('./actions-middleware');
 
 const Actions = require('./actions-model');
@@ -9,8 +10,6 @@ const router = express.Router();
 
 
 
-// - [ ] `[GET] /api/actions`
-//   - Returns an array of actions (or an empty array) as the body of the response.
 
 router.get('/', (req,res,next) => {
   Actions.get()
@@ -20,7 +19,9 @@ router.get('/', (req,res,next) => {
     .catch(next);
 })
 
-
+router.get('/:id', validActionId, (req, res, next) => {
+  res.status(200).json(req.action);
+});
 
 
 // - [ ] `[GET] /api/actions/:id`

@@ -18,7 +18,7 @@ router.get('/', (req,res,next) => {
     .catch(next);
 })
 
-router.get('/:id', validProjectId, (req, res) => {
+router.get('/:id', validProjectId, (req, res, next) => {
   res.status(200).json(req.project);
 });
 
