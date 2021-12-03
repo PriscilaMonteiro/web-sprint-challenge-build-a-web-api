@@ -43,12 +43,13 @@ router.put('/:id', validActionId, validAction, (req, res, next) => {
 })
 
 
-
-
-// - [ ] `[PUT] /api/actions/:id`
-//   - Returns the updated action as the body of the response.
-//   - If there is no action with the given `id` it responds with a status code 404.
-//   - If the request body is missing any of the required fields it responds with a status code 400.
+router.delete('/:id', validActionId, (req, res, next) => {
+  Actions.remove(req.params.id)
+    .then(() => {
+      res.status(200).json({});
+    })
+    .catch(next);
+})
 
 
 
