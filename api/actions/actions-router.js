@@ -3,6 +3,7 @@ const express = require('express');
 const {
   handleActionsError,
   validActionId,
+  validAction,
 } = require('./actions-middleware');
 
 const Actions = require('./actions-model');
@@ -23,11 +24,13 @@ router.get('/:id', validActionId, (req, res, next) => {
   res.status(200).json(req.action);
 });
 
-
-// - [ ] `[GET] /api/actions/:id`
-//   - Returns an action with the given `id` as the body of the response.
-//   - If there is no action with the given `id` it responds with a status code 404.
-
+router.post('/', validAction, (req, res, next) => {
+  Actions.insert(req.body)
+    .then(newAction => {
+      res.status(201).json(newAction);
+    })
+    .catch(next);
+});
 
 
 
