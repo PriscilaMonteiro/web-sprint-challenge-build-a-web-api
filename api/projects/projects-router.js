@@ -3,6 +3,7 @@ const express = require('express');
 const {
   handleError,
   validProjectId,
+  validProject,
 } = require('./projects-middleware');
 
 const Projects = require('./projects-model');
@@ -21,10 +22,15 @@ router.get('/:id', validProjectId, (req, res) => {
   res.status(200).json(req.project)
 });
 
-// - [ ] `[GET] /api/projects/:id`
-//   - Returns a project with the given `id` as the body of the response.
-//   - If there is no project with the given `id` it responds with a status code 404.
-
+router.post('/', validProject, (req, res, next) => {
+  Projects.insert(req.body)
+  .then(newProject => {
+    res.status(201).json(newProject)
+    console.log("newProject", newProject)
+    console.log("reqbody", req.body)
+  })
+  .catch(next)
+});
 
 
 // - [ ] `[POST] /api/projects`

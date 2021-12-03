@@ -1,4 +1,5 @@
 const Project = require('./projects-model');
+const {projectSchema} = require('../schema/projectSchema');
 
 
 function handleError(err, req, res, next) {
@@ -14,7 +15,7 @@ async function validProjectId(req, res, next) {
     const { id } = req.params;
     const project = await Project.get(id)
     if(project){
-      req.project = project
+      req.project = project // attaching project to a req object will save other middleware a trip to the database
       next();
     } else {
       next({ status:404, message: 'Project not found'})
@@ -43,7 +44,19 @@ async function validProjectId(req, res, next) {
 
 
 
-
+async function validProject(req, res, next) {
+  try {
+    const validated = await projectSchema.validate(
+      req.body,
+      { strict: false, stripUnknown: true }
+    )
+    req.body = validated
+    next()
+    console.log("schema", req.body)
+  } catch (err) {
+    next({ message: 'Name and Description fields are required', status: 400 })
+  }
+}
 
 // #### Projects
 
@@ -57,4 +70,5 @@ async function validProjectId(req, res, next) {
 module.exports = {
   handleError,
   validProjectId,
+  validProject,
 };
