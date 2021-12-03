@@ -35,7 +35,7 @@ router.put(
   validProjectId, 
   validProject, 
   checkBoolean, 
-  (req,res, next) => {
+  (req, res, next) => {
     Projects.update(req.params.id, req.body)
       .then(updated => {
         res.status(200).json(updated);
