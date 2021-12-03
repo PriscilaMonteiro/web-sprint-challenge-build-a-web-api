@@ -38,15 +38,6 @@ async function validAction(req, res, next) {
 }
 
 
-// #### Actions
-
-// | Field       | Data Type | Metadata                                                                                        |
-
-// | project_id  | number    | required, must be the id of an existing project                                                 |
-                                                         
-
-         
-
 module.exports = {
   handleActionsError,
   validActionId,

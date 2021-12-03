@@ -9,9 +9,6 @@ const {
 const Actions = require('./actions-model');
 const router = express.Router();
 
-
-
-
 router.get('/', (req,res,next) => {
   Actions.get()
     .then((actions) => {
@@ -20,6 +17,7 @@ router.get('/', (req,res,next) => {
     .catch(next);
 })
 
+// eslint-disable-next-line no-unused-vars
 router.get('/:id', validActionId, (req, res, next) => {
   res.status(200).json(req.action);
 });
@@ -32,8 +30,6 @@ router.post('/', validAction, (req, res, next) => {
     .catch(next);
 });
 
-
-
 router.put('/:id', validActionId, validAction, (req, res, next) => {
   Actions.update(req.params.id, req.body)
   .then(updated => {
@@ -42,7 +38,6 @@ router.put('/:id', validActionId, validAction, (req, res, next) => {
   .catch(next);
 })
 
-
 router.delete('/:id', validActionId, (req, res, next) => {
   Actions.remove(req.params.id)
     .then(() => {
@@ -50,13 +45,6 @@ router.delete('/:id', validActionId, (req, res, next) => {
     })
     .catch(next);
 })
-
-
-
-
-// - [ ] `[DELETE] /api/actions/:id`
-//   - Returns no response body.
-//   - If there is no action with the given `id` it responds with a status code 404.
 
 router.use(handleActionsError);
 
