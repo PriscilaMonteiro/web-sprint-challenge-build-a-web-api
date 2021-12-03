@@ -12,52 +12,52 @@ const router = express.Router();
 
 router.get('/', (req,res,next) => {
   Projects.get()
-  .then((projects) => {
-    res.status(200).json(projects);
-  })
-  .catch(next);
+    .then((projects) => {
+      res.status(200).json(projects);
+    })
+    .catch(next);
 })
 
-
 router.get('/:id', validProjectId, (req, res) => {
-  res.status(200).json(req.project)
+  res.status(200).json(req.project);
 });
 
 router.post('/', validProject, (req, res, next) => {
   Projects.insert(req.body)
-  .then(newProject => {
-    res.status(201).json(newProject)
-  })
-  .catch(next);
+    .then(newProject => {
+      res.status(201).json(newProject);
+    })
+    .catch(next);
 });
 
-router.put('/:id', validProjectId, validProject, checkBoolean, (req,res, next) => {
-  Projects.update(req.params.id, req.body)
-  .then(updated => {
-    res.status(200).json(updated)
-  })
-  .catch(next);
+router.put(
+  '/:id', 
+  validProjectId, 
+  validProject, 
+  checkBoolean, 
+  (req,res, next) => {
+    Projects.update(req.params.id, req.body)
+      .then(updated => {
+        res.status(200).json(updated);
+      })
+      .catch(next);
 })
 
 router.delete('/:id', validProjectId, (req, res, next) => {
   Projects.remove(req.params.id)
-  .then(() => {
-    res.status(200).json({})
-  })
-  .catch(next);
+    .then(() => {
+      res.status(200).json({});
+    })
+    .catch(next);
 })
 
 router.get('/:id/actions', validProjectId, (req, res, next) => {
   Projects.getProjectActions(req.params.id || req.body.project_id)
-  .then((actions) => {
-   res.status(200).json(actions)
-  })
-  .catch(next);
+    .then((actions) => {
+    res.status(200).json(actions);
+    })
+    .catch(next);
 })
-// - [ ] `[GET] /api/projects/:id/actions`
-//   - Returns an array of actions (could be empty) belonging to a project with the given `id`.
-//   - If there is no project with the given `id` it responds with a status code 404.
-
 
 router.use(handleError);
 

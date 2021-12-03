@@ -2,7 +2,7 @@ const Project = require('./projects-model');
 const {projectSchema} = require('../schema/projectSchema');
 
 
-function handleError(err, req, res, next) {
+function handleError(err, req, res, next) { //eslint-disable-line
   res.status(err.status || 500).json({
     message: err.message,
     prodMessage: 'The project information could not be retrieved',
@@ -18,10 +18,10 @@ async function validProjectId(req, res, next) {
       req.project = project // attaching project to a req object will save other middleware a trip to the database
       next();
     } else {
-      next({ status:404, message: 'Project not found'})
+      next({ status:404, message: 'Project not found'});
     }
   } catch (err) {
-    next(err)
+    next(err);
   }
 }
 
@@ -49,9 +49,9 @@ async function validProject(req, res, next) {
       { strict: false, stripUnknown: true }
     )
     req.body = validated
-    next()
+    next();
   } catch (err) {
-    next({ message: 'Name and Description fields are required', status: 400 })
+    next({ message: 'Name and Description fields are required', status: 400 });
   }
 }
 
