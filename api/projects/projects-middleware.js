@@ -14,7 +14,7 @@ async function validProjectId(req, res, next) {
     const { id } = req.params;
     const project = await Project.get(id)
     if(project){
-      res.status(200).json(project);
+      req.project = project
       next();
     } else {
       next({ status:404, message: 'Project not found'})
@@ -31,7 +31,7 @@ async function validProjectId(req, res, next) {
 //   Project.get(id)
 //   .then(project => {
 //     if (project) {
-//       res.status(200).json(project);
+//       req.project = project
 //       next()
 //     } else {
 //       next({ status: 404, message: 'project not found' })
